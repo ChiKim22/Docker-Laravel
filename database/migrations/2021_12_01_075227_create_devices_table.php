@@ -16,7 +16,7 @@ class CreateDevicesTable extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('brand_id')->constrained()->onDelete('cascade');
+            $table->string('brand');
             $table->string('spec');
             $table->year('release');
             $table->string('image')->nullable();
