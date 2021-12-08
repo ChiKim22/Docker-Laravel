@@ -81,7 +81,9 @@ class DeviceController extends Controller
     public function show($id)
     {
         $devices = Device::find($id);
-        return Inertia::render('Device/Show', compact($device));
+        return Inertia::render('Device/Show', [
+            'devices'=> $devices
+        ]);
     }
 
     /**
@@ -90,10 +92,10 @@ class DeviceController extends Controller
      * @param  \App\Models\Device  $device
      * @return \Illuminate\Http\Response
      */
-    public function edit(Device $device)
-    {
-        //
-    }
+    // public function edit(Device $device)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
