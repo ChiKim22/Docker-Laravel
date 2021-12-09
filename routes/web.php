@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\DeviceController;
-use App\Models\Post;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;

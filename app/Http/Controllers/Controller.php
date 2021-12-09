@@ -13,16 +13,17 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function show(Event $event)
-    {
-        return Inertia::render('Event/Show', [
-            'event' => $event->only('id', 'title', 'start_date', 'description'),
-        ]);
+    // public function show(Event $event)
+    // {
+        // return Inertia::render('Device/Show', [
+        //     'device' => $event->only('id', 'name', 'brand', 'release'),
+        // ]);
 
-        // Alternatively, you can use the inertia() helper
-        return inertia('Event/Show', [
-            'event' => $event->only('id', 'title', 'start_date', 'description'),
-        ]);
+        // // Alternatively, you can use the inertia() helper
+        // return inertia('Device/Show', [
+        //     'event' => $event->only('id', 'name', 'brand', 'release'),
+        // ]);
 
-    }
+    // }
+
 }

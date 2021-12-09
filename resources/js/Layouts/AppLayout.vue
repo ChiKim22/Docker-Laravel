@@ -1,29 +1,32 @@
 <template>
     <div>
-        <Head :title="title" />
+        <Head :title="Title" />
 
         <jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div class="min-h-screen bg-gray-800">
+            <nav class="bg-gray-800 border-b border-white">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
+                    <div class="flex justify-between h-20">
                         <div class="flex">
                             <!-- Logo -->
-                            <div class="flex-shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <jet-application-mark class="block h-9 w-auto" />
+                            <div class="flex-shrink-0 flex items-center" >
+                                <Link :href="route('devices.index')">
+                                    <jet-application-mark class="block h-9 w-auto" style="width:200px height:200px" />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                            <div class="hover-text-gray-100 hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <!-- <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
+                                </jet-nav-link> -->
+                                <jet-nav-link :href="route('devices.index')" :active="route().current('index')" class="text-gray-100" >
+                                    Devices
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('posts.index')" :active="route().current('index')">
-                                    Posts
+                                <jet-nav-link :href="route('devices.create')" :active="route().current('create')" class="text-gray-100" >
+                                    Regist
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -34,11 +37,12 @@
                                 <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 bg-white hover:bg-gray-700 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
                                                 {{ $page.props.user.current_team.name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                                     <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                          
                                                 </svg>
                                             </button>
                                         </span>
@@ -48,7 +52,7 @@
                                         <div class="w-60">
                                             <!-- Team Management -->
                                             <template v-if="$page.props.jetstream.hasTeamFeatures">
-                                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                                <div class="block px-4 py-2 text-xs text-gray-100">
                                                     Manage Team
                                                 </div>
 
@@ -145,9 +149,12 @@
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                        <!-- <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
-                        </jet-responsive-nav-link>
+                        </jet-responsive-nav-link> -->
+                            <jet-nav-link :href="route('devices.index')" :active="route().current('index')">
+                                    Devices
+                            </jet-nav-link>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -281,3 +288,43 @@
         }
     })
 </script>
+<style>
+body {
+  background: #0077ff;
+  font-size: 62.5%;
+}
+
+.container {
+  padding: 2em;
+}
+
+button,
+button::after {
+  -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+button {
+  background: none;
+  border-radius: 5px;
+  background-color: #AF000000;
+  display: block;
+  /* font-size: 1.6em; */
+  font-weight: bold;
+  color: #000000;
+  /* margin: 1em auto;
+  padding: 2em 6em; */
+  position: relative;
+  text-transform: uppercase;
+}
+
+button::before,
+button::after {
+  background-color: #000000;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+</style>
