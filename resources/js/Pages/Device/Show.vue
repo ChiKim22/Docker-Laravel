@@ -43,9 +43,7 @@
                                 <!-- Edit Modal -->
                                     <dialog-modal :show="isEnabled" >
                                         <template #title>
-							                    <div class="mb-4">
-                                                    <img :src="`/${device.image}`" alt="image" style="width: 100%; height: 400px; margin:0 auto; margin-top:20px">
-                                                </div>                                        
+                            
                                         </template>
                                         <template #content>
                                             <div class="mb-4">
