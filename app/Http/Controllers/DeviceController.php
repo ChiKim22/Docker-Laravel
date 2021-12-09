@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Device;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class DeviceController extends Controller
 {
@@ -61,6 +63,7 @@ class DeviceController extends Controller
 
 
         // dd($request->all());
+
         $path = $request->image->store('image', 'public');
 
         $validated = array_merge($validated, ['image' => $path]);
@@ -92,10 +95,13 @@ class DeviceController extends Controller
      * @param  \App\Models\Device  $device
      * @return \Illuminate\Http\Response
      */
-    // public function edit(Device $device)
-    // {
-    //     //
-    // }
+    public function edit(Device $devices, $id)
+    {
+        $devices = Device::find($id);
+        return Inertia::render('Device/Edit', [
+            'devices'=> $devices
+        ]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -115,12 +121,29 @@ class DeviceController extends Controller
      * @param  \App\Models\Device  $device
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Device $device, $id)
+    public function destroy($id)
     {
         $devices = Device::find($id);
+
+        $filename = $devices->image;
+        $image = Str::of(`$filename`)->remove('storage/');
+        dd($image);
+        
+       //잡소리 
+
+        if(Storage::exists($image)){
+            dd($image);
+            Storage::delete($image);
+        }else{
+            dd('File dose not exists...');
+        }
+
+        dd($image);
+//delete
         if($devices != null){
             $devices->delete();
-            return redirect()->back();
         }
+
+        return redirect()->route('devices.index');
     }
 }
