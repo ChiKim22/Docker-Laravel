@@ -81,3 +81,8 @@ export default {
       ],
 }
 </script>
+<style>
+    button:hover {
+        color: #0077ff;
+    }
+</style>
