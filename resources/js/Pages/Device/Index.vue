@@ -6,7 +6,7 @@
       <div>
         <!-- <button @click="openModal()" :props="device" class="w-full h-auto"  > -->
            <button @click="show(device)"  class="w-full h-auto" >
-              <img :src="device.image" style="width: 100%; height: 300px; margin:0 auto; margin-top:20px" alt="image">
+              <img :src=device.image style="width: 400px; height: 300px; margin:0 auto; margin-top:20px" alt="image">
           </button>
       </div>
 
@@ -58,10 +58,6 @@
 
 export default {
     props:['devices'],
-    setup() {
-        // const device = computed(() => usePage().props.value.device )
-        // return {device}
-    },
       components: {
         AppLayout,
         Pagination,
@@ -72,83 +68,9 @@ export default {
         }
       },
   methods: {
-
-  // openModal: function(){
-  //   this.isOpen = true;
-
-    // this.form.name = this.devices.name;
-    // this.form.spec = this.devices.spec;
-    // update();
-
-  // },
-  //   update: function(){
-  //   this.$inertia.get('/devices/'+ devices.id)
-  // },
-  // closeModal: function(){
-  //   this.isOpen = false;
-  //   this.reset();
-  //   this.editMode=false;
-  // },
-  // reset: function(){
-  //   this.form = {
-  //       id: this.devices,
-  //       image: null,
-  //       name: '',
-  //       release: null,
-  //       brand: '',
-  //       spec : '',
-  //   }
-  // },
-
     show: function(devices) {
       this.$inertia.get('/devices/' + devices.id)
     },
   }
 }
 </script>
-
-<style>
-body {
-  background: #0077ff;
-  font-size: 62.5%;
-}
-
-.container {
-  padding: 2em;
-}
-
-button,
-button::after {
-  -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-  -o-transition: all 0.3s;
-    transition: all 0.3s;
-}
-
-button {
-  background: none;
-  border: 3px solid #fff;
-  border-radius: 5px;
-  color: #fff;
-  display: block;
-  font-size: 1.6em;
-  font-weight: bold;
-  margin: 1em auto;
-  padding: 2em 6em;
-  position: relative;
-  text-transform: uppercase;
-}
-
-button::before,
-button::after {
-  background: #fff;
-  content: '';
-  position: absolute;
-  z-index: -1;
-}
-
-button:hover {
-  color: #0077ff;
-}
-
-</style>

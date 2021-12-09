@@ -39,7 +39,7 @@
 
                         <div class="form-group my-2">
                         <label for="spec">Spec : </label>
-                        <input type="text" class="form-control" id="spec" placeholder="Spec" v-model="this.form.spec" style="width:30%" >
+                        <textarea type="text" class="form-control" id="spec" placeholder="Spec" v-model="this.form.spec" style="width:30%" />
                         </div>
                             <div v-if="errors.spec">{{ errors.spec }}</div>
 
