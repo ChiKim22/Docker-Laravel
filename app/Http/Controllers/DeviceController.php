@@ -83,9 +83,9 @@ class DeviceController extends Controller
 
     public function show($id)
     {
-        $devices = Device::find($id);
+        $device = Device::find($id);
         return Inertia::render('Device/Show', [
-            'devices'=> $devices
+            'device'=> $device
         ]);
     }
 
@@ -95,13 +95,10 @@ class DeviceController extends Controller
      * @param  \App\Models\Device  $device
      * @return \Illuminate\Http\Response
      */
-    public function edit(Device $devices, $id)
-    {
-        $devices = Device::find($id);
-        return Inertia::render('Device/Edit', [
-            'devices'=> $devices
-        ]);
-    }
+    // public function edit(Device $device)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -112,7 +109,33 @@ class DeviceController extends Controller
      */
     public function update(Request $request, Device $device)
     {
-        //
+        $now = now(); // Current year
+
+        $validated = $request->validate([
+            'brand' => 'required',
+            'spec' => 'required | min:1',
+            'name' => 'required',
+            'image' => 'image',
+            'release' => 'required |numeric|min:1900|max:'.($now->year+1),
+        ]);
+
+        $path = null;
+        
+        if($request->image){  // 기존 이미지를 변경하고자 할 때.
+            Storage::delete($device->image);
+            $path = $request->image->store('image', 'public');
+        }   
+
+        if($path != null){
+            $validated = array_merge($validated, ['image' => $path]);
+        }
+
+        // dd($validated);
+
+        $device->update($validated);
+
+        return redirect()->route('devices.show', ['device'=> $device->id]);
+        
     }
 
     /**
@@ -123,16 +146,12 @@ class DeviceController extends Controller
      */
     public function destroy($id)
     {
-        $devices = Device::find($id);
+        $device = Device::find($id);
 
-        $filename = $devices->image;
-        $image = Str::of(`$filename`)->remove('storage/');
-        dd($image);
-        
-       //잡소리 
+        $image = $device->image;
+
 
         if(Storage::exists($image)){
-            dd($image);
             Storage::delete($image);
         }else{
             dd('File dose not exists...');
@@ -140,8 +159,8 @@ class DeviceController extends Controller
 
         dd($image);
 //delete
-        if($devices != null){
-            $devices->delete();
+        if($device != null){
+            $device->delete();
         }
 
         return redirect()->route('devices.index');
