@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Device extends Model
 {
     use HasFactory;
-
     protected $guarded = [];
 
-    public function brand() {
-        return $this->belongsTo(Brand::class);
+    public function getImageAttribute($value){
+        return 'storage/' . $value; // Accesser
+    }
+
+    public function defaultImage(){
+        return '/Users/jinhokim/docker-laravel/storage/app/public/logo/logo.png';
     }
 }
