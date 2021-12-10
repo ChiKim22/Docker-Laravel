@@ -5,7 +5,7 @@
     <div class="bg-gray-200 rounded overflow-hidden shadow-lg">
       <div>
            <button @click="show(device)"  class="w-full h-auto" >
-              <img :src='device.image' style="width: 400px; height: 300px; margin:0 auto; margin-top:20px" alt="image">
+              <img :src="`/${device.image}`" style="width: 400px; height: 300px; margin:0 auto; margin-top:20px" alt="image">
           </button>
       </div>
 
@@ -29,7 +29,7 @@
     import Pagination from '@/Jetstream/Pagination.vue'
 
 export default {
-    props:['devices','user'],
+    props:['devices'],
       components: {
         AppLayout,
         Pagination,

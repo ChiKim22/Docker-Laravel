@@ -6,7 +6,6 @@ use App\Models\Device;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 
 class DeviceController extends Controller
 {
@@ -54,11 +53,11 @@ class DeviceController extends Controller
         $now = now(); // Current year
 
         $validated = $request->validate([
+            'image' => 'image',
             'brand' => 'required',
             'spec' => 'required | min:1',
             'release' => 'required |numeric|min:1900|max:'.($now->year+1),
             'name' => 'required',
-            'image' => 'image',
         ]);
 
 
@@ -115,14 +114,12 @@ class DeviceController extends Controller
             'brand' => 'required',
             'spec' => 'required | min:1',
             'name' => 'required',
-            'image' => 'image',
             'release' => 'required |numeric|min:1900|max:'.($now->year+1),
         ]);
 
         $path = null;
         
-        if($request->image){  // 기존 이미지를 변경하고자 할 때.
-            Storage::delete($device->image);
+        if($request->image){ 
             $path = $request->image->store('image', 'public');
         }   
 
@@ -148,16 +145,6 @@ class DeviceController extends Controller
     {
         $device = Device::find($id);
 
-        $image = $device->image;
-
-
-        if(Storage::exists($image)){
-            Storage::delete($image);
-        }else{
-            dd('File dose not exists...');
-        }
-
-        dd($image);
 //delete
         if($device != null){
             $device->delete();

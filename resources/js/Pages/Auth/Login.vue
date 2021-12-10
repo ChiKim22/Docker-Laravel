@@ -1,10 +1,10 @@
 <template>
     <Head title="Log in" />
     <jet-authentication-card>
-        <template #logo>
+        <!-- <template #logo>
             <jet-authentication-card-logo />
-        </template>
-
+        </template> -->
+        <img src="/storage/logo/logo.png" alt="image">
         <jet-validation-errors class="mb-4" />
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
