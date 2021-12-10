@@ -22,9 +22,9 @@
                                 <!-- <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link> -->
-                                <jet-nav-link :href="route('devices.index')" :active="route().current('index')" class="text-gray-100" >
+                                <!-- <jet-nav-link :href="route('devices.index')" :active="route().current('index')" class="text-gray-100" >
                                     Devices
-                                </jet-nav-link>
+                                </jet-nav-link> -->
                                 <jet-nav-link :href="route('devices.create')" :active="route().current('create')" class="text-gray-100" >
                                     Regist
                                 </jet-nav-link>

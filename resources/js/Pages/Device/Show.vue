@@ -10,7 +10,11 @@
 				                <!-- Row -->
 					            <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
 						            <h3 class="text-2xl text-center">{{ device.brand }}</h3>
+                                     <div v-if="errors.brand">{{ errors.brand }}</div> 
+
                                             <img :src="`/${device.image}`" alt="image" style="width: 100%; height: 400px; margin:0 auto; margin-top:20px">
+                                            <div v-if="errors.image">{{ errors.image }}</div>  
+                                            
                                     <div class="mt-4 mb-4 md:flex md:justify-between">
 								        <div class="mb-4 md:mr-2 md:mb-0">
                                             <label for="brand">Name</label>
@@ -49,6 +53,7 @@
                                                         <label for="image" class="text-gray-700 select-none font-medium">Image</label>
                                                         <input type="file" id="image" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200" @input="device.image = $event.target.files[0]">
                                                         <br>
+                                                        <div v-if="errors.image">{{ errors.image }}</div>  
 
                                                     <div class="form-group my-2">
                                                         <label for="brand">Brand : </label>
@@ -127,7 +132,7 @@
                     if (!confirm('Are you sure want to change?')){
                         this.isUpdatable = true;
                         this.isEnabled = false;
-                        return;
+                        // return;
                     }else {
                         device._method = 'PUT';
                         this.$inertia.post('/devices/' + device.id, device);

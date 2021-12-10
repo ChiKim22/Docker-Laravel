@@ -53,11 +53,11 @@ class DeviceController extends Controller
         $now = now(); // Current year
 
         $validated = $request->validate([
-            'image' => 'image',
             'brand' => 'required',
             'spec' => 'required | min:1',
             'release' => 'required |numeric|min:1900|max:'.($now->year+1),
             'name' => 'required',
+            'image' => 'image',
         ]);
 
 
@@ -108,18 +108,19 @@ class DeviceController extends Controller
      */
     public function update(Request $request, Device $device)
     {
-        $now = now(); // Current year
 
         $validated = $request->validate([
             'brand' => 'required',
             'spec' => 'required | min:1',
             'name' => 'required',
-            'release' => 'required |numeric|min:1900|max:'.($now->year+1),
+            'image' => 'required | image',
+            'release' => 'required |numeric|min:1900',
         ]);
 
         $path = null;
         
-        if($request->image){ 
+        if($request->image){
+            Storage::delete($device->image);
             $path = $request->image->store('image', 'public');
         }   
 
@@ -145,7 +146,6 @@ class DeviceController extends Controller
     {
         $device = Device::find($id);
 
-//delete
         if($device != null){
             $device->delete();
         }
